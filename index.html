@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ตารางอ่านหนังสือ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+        }
+        h2 {
+            text-align: center;
+        }
+        input, button, select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: black;
+            color: white;
+            cursor: pointer;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>ตารางอ่านหนังสือ</h2>
+        <input type="text" id="subject" placeholder="ชื่อวิชา">
+        <label>เวลาเริ่ม</label>
+        <input type="time" id="start-time">
+        <label>เวลาสิ้นสุด</label>
+        <input type="time" id="end-time">
+        <button onclick="addSchedule()">เพิ่มลงตาราง</button>
+        
+        <table id="schedule-table">
+            <thead>
+                <tr>
+                    <th>วิชา</th>
+                    <th>เวลา</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    
+    <script>
+        function addSchedule() {
+            let subject = document.getElementById("subject").value;
+            let startTime = document.getElementById("start-time").value;
+            let endTime = document.getElementById("end-time").value;
+            
+            if (subject && startTime && endTime) {
+                let table = document.getElementById("schedule-table").getElementsByTagName('tbody')[0];
+                let newRow = table.insertRow();
+                newRow.insertCell(0).innerText = subject;
+                newRow.insertCell(1).innerText = `${startTime} - ${endTime}`;
+                
+                document.getElementById("subject").value = "";
+                document.getElementById("start-time").value = "";
+                document.getElementById("end-time").value = "";
+            } else {
+                alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+            }
+        }
+    </script>
+</body>
+</html>
